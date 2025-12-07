@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snail Detector Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p>Initializing Snail Detector...</p>
+    </div>
+
+    <!-- MAIN UI -->
+    <div id="app" class="hidden">
+
+        <header>
+            <h1>🐌 Snail Detector Dashboard</h1>
+            <p class="subtitle">Real-time YOLO detection • Raspberry Pi</p>
+        </header>
+
+        <main>
+
+            <div class="grid">
+
+                <!-- VIDEO STREAM -->
+                <div class="card video-card">
+                    <h2>Live Stream</h2>
+                    <img id="video-feed" src="/video_feed" alt="Video stream">
+                </div>
+
+                <!-- COUNTER -->
+                <div class="card counter-card">
+                    <h2>Snail Count</h2>
+                    <p id="snail-count" class="count">0</p>
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer>
+            <p>© 2025 Snail Detector • Raspberry Pi 5</p>
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
