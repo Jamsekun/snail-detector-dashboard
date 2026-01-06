@@ -6,6 +6,7 @@
     <title>Snail Detector Dashboard</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -39,6 +40,48 @@
                     <p id="snail-count" class="count">0</p>
                 </div>
 
+            </div>
+
+            <!-- STATISTICS DROPDOWN -->
+            <div class="card stats-card">
+                <div class="stats-header" id="stats-header">
+                    <h2>📊 Statistics</h2>
+                    <button class="stats-toggle" id="stats-toggle" aria-label="Toggle statistics">
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                </div>
+                
+                <div class="stats-content" id="stats-content">
+                    <!-- Current values (always visible) -->
+                    <div class="stats-current">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Snails:</span>
+                            <span class="stat-value" id="stat-total">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Live Snails:</span>
+                            <span class="stat-value" id="stat-live">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Inference FPS:</span>
+                            <span class="stat-value" id="stat-inf-fps">0.0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Stream FPS:</span>
+                            <span class="stat-value" id="stat-str-fps">0.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Charts (visible when expanded) -->
+                    <div class="stats-charts" id="stats-charts">
+                        <div class="chart-container">
+                            <canvas id="countChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="fpsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </main>
