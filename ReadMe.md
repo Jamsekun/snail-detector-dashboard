@@ -12,6 +12,9 @@ https://docs.google.com/document/d/1Ord8GUadrCt9juEyxec3E2J4PcRICa8mgtLTRGmQCzY/
 ### Diagram: 
 https://drive.google.com/file/d/1h9UvJq3isVFq-7sfJFf6jpK9AfBp8Zjo/view?usp=drive_link
 
+### IMPORTANT:
+run it thru `dashboard\dashboard_snail_3classes.py`
+
 # Changelog
 
 ## [2025-01-05]
@@ -56,4 +59,26 @@ https://drive.google.com/file/d/1h9UvJq3isVFq-7sfJFf6jpK9AfBp8Zjo/view?usp=drive
   - **INF FPS** (inference rate)
   - **STR FPS** (stream rate)
 - Rolling FPS average over last 30 frames
+
+---
+
+## [2026-02-06]
+### Added
+- FusionTracker: new Kalman+IoU+Appearance tracker (keeps backward-compatible fields used by the dashboard)
+- `/classes` API endpoint exposing model class id→name and color for the UI
+- Unit tests for `FusionTracker` (dashboard/tests/test_fusion_tracker.py)
+- `dashboard/README_tracker.md` with switching and tuning instructions
+
+### Changed
+- Default tracker selection moved to top-level flag `TRACKER_IMPL` (set to `"fusion"` or `"centroid"`) for easy switching
+- Dashboard now displays per-class labels and a legend with deterministic colors
+- Frontend: main dashboard counter (`static/script.js`) now prefers the live count (`live`) over total
+
+### Fixed
+- Prevent inference thread crashes from tracker KeyError by guarding `stable_frames` access and catching tracker exceptions (inference thread now logs errors and continues)
+- Improved robustness of tracker assignment code (Hungarian / greedy fallback with gating)
+
+### Notes
+- Appearance embeddings use a cheap HSV-histogram fallback when a heavy embedder is not provided (CPU-friendly). Disable appearance matching by constructing `FusionTracker(use_appearance=False)` or set `TRACKER_IMPL = "centroid"` to use the simpler tracker.
+- If you want me to run the unit tests in your venv or flip the default to `centroid` for lower CPU load, tell me and I'll update the repo and run them.
 
