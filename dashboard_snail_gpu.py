@@ -108,7 +108,7 @@ class CentroidTracker:
 # ------------------------------
 # CONFIG - tune these for speed
 # ------------------------------
-MODEL_PATH = "models/last.pt"          # your model - try a small model (yolov8n / yolov8n-seg)
+MODEL_PATH = r"C:/James_folder/embedded_projects/Thesis_Clients/Snail_machine/dashboard/models/snail_detector3_newclass.pt"          # your model - try a small model (yolov8n / yolov8n-seg)
 TARGET_WIDTH = 1280                     # inference input width (smaller -> faster) 480 or 1280
 TARGET_HEIGHT = 720                    # inference input height (smaller -> faster) 640 or 720
 TARGET_FPS = 30.0                      # target visual framerate (lower = smoother if hardware limited)
@@ -434,7 +434,7 @@ def inference_thread():
                     label = f"ID:{obj_id} {conf:.2f}"
                     # Check if counted (stable)
                     if obj_id in tracker.counted_ids:
-                        label += " ✓"
+                        label += " check"
                     
                     # Calculate text size for background
                     (text_width, text_height), baseline = cv2.getTextSize(

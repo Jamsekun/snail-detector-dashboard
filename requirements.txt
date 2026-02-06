@@ -4,3 +4,4 @@ torch
 ultralytics
 numpy
 onnxruntime
+munkres

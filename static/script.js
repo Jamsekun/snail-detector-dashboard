@@ -22,7 +22,8 @@ function fetchSnailCount() {
         .then(data => {
             const el = document.getElementById("snail-count");
             if (el) {
-                el.innerText = data.total || data.count || 0;
+                // Prefer live count for the dashboard main display; fall back to total or legacy fields
+                el.innerText = (data.live ?? data.total ?? data.count ?? 0);
             }
             // Update statistics current values
             updateStatsCurrent(data);
