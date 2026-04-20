@@ -132,7 +132,7 @@ class CentroidTracker:
 MODEL_PATH = r"C:/James_folder/embedded_projects/Thesis_Clients/Snail_machine/dashboard/models/snail_detector3_newclass.pt"          # your model - try a small model (yolov8n / yolov8n-seg)
 
 TARGET_WIDTH = 1280                     # inference input width (smaller -> faster) 480 or 1280
-TARGET_HEIGHT = 736                    # inference input height (smaller -> faster) 640 or 720
+TARGET_HEIGHT = 640                    # inference input height (smaller -> faster) 640 or 720
 TARGET_FPS = 30.0                      # target visual framerate (lower = smoother if hardware limited)
 ANNOTATE_EVERY_N = 1                   # draw boxes on every Nth inference (increase to reduce drawing cost)
 JPEG_QUALITY = 70                      # encode quality (0-100) smaller = faster & less bandwidth (lowered for speed)
@@ -739,11 +739,11 @@ def inference_thread():
                 predict_kwargs = dict(imgsz=(TARGET_HEIGHT, TARGET_WIDTH), device=DEVICE, conf=0.50, verbose=False)
                 if USE_HALF:
                     predict_kwargs["half"] = True
-                results = model.predict( input_frame, imgsz=(TARGET_HEIGHT, TARGET_WIDTH), device=DEVICE, conf=0.50, verbose=False, half=USE_HALF if USE_HALF else False )
+                results = model.predict( input_frame, imgsz=(TARGET_HEIGHT, TARGET_WIDTH), device=DEVICE, conf=0.50, iou=.30, verbose=False, half=USE_HALF if USE_HALF else False )
             except TypeError:
                 # fallback if API doesn't accept tuple imgsz
                 try:
-                    results = model.predict(input_frame, imgsz=TARGET_WIDTH, device=DEVICE, conf=0.50, verbose=False)
+                    results = model.predict(input_frame, imgsz=TARGET_WIDTH, device=DEVICE, conf=0.50, iou=.30, verbose=False)
                 except Exception as e:
                     print("[WARN] model.predict failed:", e)
                     time.sleep(0.01)

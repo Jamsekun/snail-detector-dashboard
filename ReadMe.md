@@ -15,6 +15,12 @@ https://drive.google.com/file/d/1h9UvJq3isVFq-7sfJFf6jpK9AfBp8Zjo/view?usp=drive
 ### IMPORTANT:
 run it thru `dashboard\dashboard_snail_3classes.py`
 
+### How to run After Cloning (make sure you are in the main outside folder)
+1. `python -m venv venv`
+2. `venv\Scripts\activate`
+3. `pip install -r requirements.txt`
+4. `python dashboard_snail_3classes.py`
+
 # Changelog
 
 ## [2025-01-05]
@@ -82,3 +88,19 @@ run it thru `dashboard\dashboard_snail_3classes.py`
 - Appearance embeddings use a cheap HSV-histogram fallback when a heavy embedder is not provided (CPU-friendly). Disable appearance matching by constructing `FusionTracker(use_appearance=False)` or set `TRACKER_IMPL = "centroid"` to use the simpler tracker.
 - If you want me to run the unit tests in your venv or flip the default to `centroid` for lower CPU load, tell me and I'll update the repo and run them.
 
+
+---
+
+## [2026-04-20]
+### Updated
+- best.pt in \models
+- added iou parameter in dashboard
+- 300 Epoch training because maangas tayo 
+
+## NEW Training March
+
+ultralytics train model="yolo11n.pt" data="data.yaml" epochs=300 imgsz=640 batch=16 device=0 optimizer=AdamW save_period=10 name=snail_detector_IMPROVED plots=true val=true
+
+
+## after training March, run to test tests 
+yolo val model=runs/train/snail_detector_IMPROVED/weights/best.pt data=data.yaml split=test
