@@ -104,3 +104,8 @@ ultralytics train model="yolo11n.pt" data="data.yaml" epochs=300 imgsz=640 batch
 
 ## after training March, run to test tests 
 yolo val model=runs/train/snail_detector_IMPROVED/weights/best.pt data=data.yaml split=test
+
+## [2026-04-30]
+### Updated
+-New model format
+-use dashboard_snail_onnx_version
